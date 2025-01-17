@@ -1,0 +1,18 @@
+{
+    "out":"./migrations",
+    "schema": "./src/db/schema.ts",
+    "dialect": "mysql",
+    "brakpoints": true,
+    "dbCredentials": {
+        "host":"localhost",
+        "user":"root",
+        "port": 5432,
+        "database":"drizzle",
+        "password":""
+    },
+    "migrations": {
+        "prefix": "timestamp",
+        "table": "__drizzle_migrations__",
+        "schema": "public"
+    }
+}

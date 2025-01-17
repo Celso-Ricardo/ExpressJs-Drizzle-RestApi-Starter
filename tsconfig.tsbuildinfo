@@ -1,0 +1,1 @@
+{"root":["./migrations/migrator.ts","./src/drizzle.config.ts","./src/index.ts","./src/controllers/user.ts","./src/controllers/auth/authentication.ts","./src/db/db.ts","./src/db/schema.ts","./src/routers/auth.ts","./src/routers/index.ts","./src/routers/user.ts","./src/services/user.ts"],"errors":true,"version":"5.7.3"}
