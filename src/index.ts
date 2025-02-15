@@ -1,5 +1,5 @@
 import express from "express";
-import { Express } from "express-serve-static-core";
+import { Express, Request, Response } from "express-serve-static-core";
 import routes from "./routers";
 
 declare global {
@@ -20,6 +20,9 @@ const app: Express = express();
 app.get("/", (req, res) => {
   res.status(200).send("Works");
 });
+app.get("/favicon.ico", (req, res) => {
+  res.status(204);
+});
 
 app.use(express.json());
 //app.use(cors);
@@ -28,6 +31,7 @@ app.use(
     extended: true,
   }),
 );
+
 routes(app);
 
 // Swagger docs
