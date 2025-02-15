@@ -5,7 +5,8 @@ import {
   RequestHandler,
 } from "express-serve-static-core";
 import { insertNewUser, getUserByEmail } from "../../services/user";
-
+import bcrypt from "bcryptjs";
+import { sign } from "jsonwebtoken";
 import { MY_ACCESS_TOKEN_SECRET } from "../../config";
 
 export const register = async (
@@ -18,7 +19,6 @@ export const register = async (
   try {
     const { email, password, name } = req.body;
 
-    const bcrypt = require("bcryptjs");
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const newUser = await insertNewUser(name, email, hashedPassword);
@@ -42,14 +42,13 @@ export const login = async (req: Request, res: Response): Promise<any> => {
       return res.status(401).json({ message: "Email or password is invalid" });
     }
 
-    const bcrypt = require("bcryptjs");
     const passwordMatch = await bcrypt.compare(password, user.password);
 
     if (!passwordMatch) {
       return res.status(401).json({ message: "Email or password is invalid" });
     }
-    const jwt = require("jsonwebtoken");
-    const accessToken = jwt.sign({ userId: user.id }, MY_ACCESS_TOKEN_SECRET, {
+
+    const accessToken = sign({ userId: user.id }, MY_ACCESS_TOKEN_SECRET!, {
       subject: "accessApi",
       expiresIn: "1h",
     });
