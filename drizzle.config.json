@@ -1,6 +1,6 @@
 {
-    "out":"./migrations",
-    "schema": "./src/db/schema.ts",
+    "out":"./drizzle",
+    "schema": "./src/db/mysql_schema.ts",
     "dialect": "mysql",
     "brakpoints": true,
     "dbCredentials": {

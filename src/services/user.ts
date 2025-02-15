@@ -1,18 +1,17 @@
-import { users, User } from "../db/schema";
-import { db } from "../db/db";
+import { users, User , NewUser} from "../db/postgresql_schema";
+import { db } from "../db/postgresql_db";
 import { eq } from "drizzle-orm";
 
 export const insertNewUser = async (name:string , email:string, password:string) => {
+    
+    //TODO INSERT AND RETURN THE INSERTED USER WITH ONLY ONE QUERY
     try {
         const result = await db.insert(users).values({
             name: name,
             email : email,
             password: password,
-        }).$returningId();
-        
-        // .then(resultthen => {
-        //     console.log(`do then: ${JSON.stringify(resultthen)}`)
-        // });
+        }).returning();
+       
         return result;
     } catch (error:any) {
         const Strings = require( 'strings.js' );
@@ -26,12 +25,14 @@ export const insertNewUser = async (name:string , email:string, password:string)
     }
 }
 
-export const getAllUsers =  async () => {
+export const getAllUsers =  async (): Promise<User[]|false> => {
     try {
-        const resultRes = await db.select().from(users);   
+        const resultRes = await db.select().from(users); 
+        return resultRes;  
     } catch (error) {
         console.log(error);
     }
+    return false
 }
 
 export const getUserById = async (id:number): Promise<User|false> => {

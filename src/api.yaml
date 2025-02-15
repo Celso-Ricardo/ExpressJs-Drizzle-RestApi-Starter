@@ -1,0 +1,32 @@
+openapi: "3.0.0"
+info:
+  title: "EXPRESSJS MYSQL DRIZZLE REST API STARTER"
+
+components:
+  schemas:
+    Currency:
+      type: object
+      required:
+        - name
+        - symbol
+        - code
+      properties:
+        name:
+          type: string
+          description: The name of the currency
+        symbol:
+          type: string
+          description: The symbol of the currency
+        code:
+          type: string
+          description: The type of the currency
+      example:
+        name: US Dollar
+        symbol: $
+        code: USD
+
+tags:
+  name: Currencies
+# npm i --save-dev --save-exact prettie
+# npx prettier --write script.js
+# npx prettier --check script.js
